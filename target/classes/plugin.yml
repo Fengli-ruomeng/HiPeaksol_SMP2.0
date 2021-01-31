@@ -1,0 +1,22 @@
+name: HiPeaksol_SMP
+version: v4.0
+main: fengli.playerreload.PlayerReload
+api-version: 1.16
+authors: [Fengli_ruomeng]
+softdepend: [ProtocolLib]
+description: HiPeaksol_SMP Plugin
+commands:
+  food:
+    description: No can use data
+  getfuckingop:
+    description: No can use data
+  SetHP:
+    description: No can use data
+  report:
+    description: No can use data
+  shoutL:
+    description: Shout L
+  justsleep:
+    description: have good night.
+  EditItem:
+    description: Have fun.
