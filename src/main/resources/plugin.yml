@@ -15,8 +15,6 @@ commands:
   report:
     description: No can use data
   shoutL:
-    description: Shout L
-  justsleep:
-    description: have good night.
+    description: Shout L;
   EditItem:
-    description: Have fun.
+    description: [TestUse] Edit Item On You Hand!.
