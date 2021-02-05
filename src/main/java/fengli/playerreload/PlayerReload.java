@@ -20,6 +20,7 @@ public final class PlayerReload extends JavaPlugin {
         this.getCommand("report").setExecutor(new report());
         this.getCommand("ShoutL").setExecutor(new shoutL());
         this.getCommand("EditItem").setExecutor(new EditItem());
+        this.getCommand("ReportMenu").setExecutor(new ReportMenu());
 
         this.getServer().getPluginManager().registerEvents(new titledamage(), this);
         this.getServer().getPluginManager().registerEvents(new joinmess(this), this);
