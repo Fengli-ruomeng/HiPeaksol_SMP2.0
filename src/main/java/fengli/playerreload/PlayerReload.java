@@ -24,7 +24,10 @@ public final class PlayerReload extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new titledamage(), this);
         this.getServer().getPluginManager().registerEvents(new joinmess(this), this);
+        /*
+        临时禁用测试功能
         this.getServer().getPluginManager().registerEvents(new chiji(), this);
+        */
         this.getServer().getPluginManager().registerEvents(new joinanddie(this), this);
 
     }
