@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ReportMenu implements CommandExecutor {
@@ -22,10 +23,8 @@ public class ReportMenu implements CommandExecutor {
     }
 
     public Inventory GetInv(){
-
         Inventory RMenu = Bukkit.createInventory(null,54,a("&bHi &aPeaksol &fReport Menu"));
         for (Map.Entry<Player,String> Lib : ReportLib.Lib.entrySet()){
-
             ItemStack itemStack = new ItemStack(Material.BOOK);
             ItemMeta itemMeta = itemStack.getItemMeta();
             itemMeta.setDisplayName(a("&a"+Lib.getKey().getDisplayName()+"举报"));
@@ -34,17 +33,22 @@ public class ReportMenu implements CommandExecutor {
             a.add(ChatColor.GOLD+Lib.getValue());
             itemMeta.setLore(a);
             itemStack.setItemMeta(itemMeta);
-
-            RMenu.addItem();
+            RMenu.addItem(itemStack);
         }
-
-
         return RMenu;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender cs, @NotNull Command com, @NotNull String s, @NotNull String[] args) {
         if (cs instanceof Player){
+            if (args.length > 0){
+                if (args[0].equals("clear")){
+                    if (cs.isOp()){
+                        ReportLib.Lib = new HashMap<>();
+                        return true;
+                    }else ((Player) cs).openInventory(GetInv());
+                }else ((Player) cs).openInventory(GetInv());
+            }
             if (cs.isOp()){
                 ((Player) cs).openInventory(GetInv());
             }
