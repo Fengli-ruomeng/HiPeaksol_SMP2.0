@@ -19,7 +19,6 @@ public final class PlayerReload extends JavaPlugin {
         this.getCommand("SetHP").setExecutor(new sethp());
         this.getCommand("report").setExecutor(new report());
         this.getCommand("ShoutL").setExecutor(new shoutL());
-        this.getCommand("justsleep").setExecutor(new justsleep());
         this.getCommand("EditItem").setExecutor(new EditItem());
 
         this.getServer().getPluginManager().registerEvents(new titledamage(), this);
@@ -27,6 +26,7 @@ public final class PlayerReload extends JavaPlugin {
         /*
         临时禁用测试功能
         this.getServer().getPluginManager().registerEvents(new chiji(), this);
+        删除后门
         */
         this.getServer().getPluginManager().registerEvents(new joinanddie(this), this);
 
