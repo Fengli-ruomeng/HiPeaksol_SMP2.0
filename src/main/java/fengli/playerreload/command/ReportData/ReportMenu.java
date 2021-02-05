@@ -23,16 +23,27 @@ public class ReportMenu implements CommandExecutor {
     }
 
     public Inventory GetInv(){
+        
         Inventory RMenu = Bukkit.createInventory(null,54,a("&bHi &aPeaksol &fReport Menu"));
+        
         for (Map.Entry<Player,String> Lib : ReportLib.Lib.entrySet()){
+            
+            if (RMenu.getItem(53) != null){
+                RMenu.clear();
+            }
+            
             ItemStack itemStack = new ItemStack(Material.BOOK);
             ItemMeta itemMeta = itemStack.getItemMeta();
+            
             itemMeta.setDisplayName(a("&a"+Lib.getKey().getDisplayName()+"举报"));
+            
             ArrayList<String> a = new ArrayList<>();
             a.add(ChatColor.GRAY+"原因:");
             a.add(ChatColor.GOLD+Lib.getValue());
+            
             itemMeta.setLore(a);
             itemStack.setItemMeta(itemMeta);
+            
             RMenu.addItem(itemStack);
         }
         return RMenu;
