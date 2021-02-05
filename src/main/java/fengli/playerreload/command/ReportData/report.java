@@ -7,7 +7,7 @@ import fengli.playerreload.nms.*;
 
 public class report implements CommandExecutor
 {
-    public boolean onCommand(  CommandSender sender,   Command command,   String label,   String[] args) {
+    public boolean onCommand(CommandSender sender,Command command,String label,String[] args) {
         if (sender instanceof Player) {
             if (args.length > 0) {
                   Player player = Bukkit.getPlayer(args[0]);
@@ -18,10 +18,17 @@ public class report implements CommandExecutor
                     dj.sendActionbar(player2, s);
                     return false;
                 }
-                if(args[1] == null){
+                if (args.length != 2){
                     Player player2 = (Player)sender;
                     ActBord dj = new ActBord_true();
-                    String s = "你并没有填入举报内容!";
+                    String s = "你并没有填入举报内容";
+                    dj.sendActionbar(player2,s);
+                    return false;
+                }
+                if (player.getUniqueId().equals(((Player) sender).getUniqueId())) {
+                    Player player2 = (Player)sender;
+                    ActBord dj = new ActBord_true();
+                    String s = "您不能举报自己!";
                     dj.sendActionbar(player2,s);
                     return false;
                 }
