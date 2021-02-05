@@ -18,3 +18,5 @@ commands:
     description: Shout L;
   EditItem:
     description: [TestUse] Edit Item On You Hand!.
+  ReportMenu:
+    description: No things.
