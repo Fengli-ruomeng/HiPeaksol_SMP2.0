@@ -16,14 +16,10 @@ public class PlayerDataPack {
     不知道这个方法有什么意义，反正写上就完事了，又不亏
     有BUG会音速更新，目前该数据包类处于测试.
     */
-    private double Health;
-    private int FoodLevel;
-    private float Saturation;
-    private Location NLocation;
-    private final String Name;
-    private GameMode NGamemode ;
-    private final UUID NUUID;
-    private float Exp;
+    private double Health;      private int FoodLevel;
+    private float Saturation;   private Location NLocation;
+    private final String Name;  private GameMode NGamemode ;
+    private final UUID NUUID;   private float Exp;
     //创建一个玩家的包
     public PlayerDataPack(Player player){
         this.Health = player.getHealth();
@@ -71,36 +67,23 @@ public class PlayerDataPack {
         return true;
     }
     //不提供指定覆盖某样数据的功能，因为可以直接从某个包内提取数据然后直接Set.
-
+    
     //set
     public void setHealth(double health) { Health = health; }
-
     public void setFoodLevel(int foodLevel) { FoodLevel = foodLevel; }
-
     public void setSaturation(float saturation) { Saturation = saturation; }
-
     public void setLocation(Location NLocation) { this.NLocation = NLocation; }
-
     //Set方法里不提供设置名字和UUID 因为这两条数据是用于判断是否为特殊私有包用
-
     public void setGamemode(GameMode NGamemode) { this.NGamemode = NGamemode; }
-
     public void setExp(float exp) { Exp = exp; }
-
+    
     //get
     public double getHealth() { return Health; }
-
     public int getFoodLevel() { return FoodLevel; }
-
     public float getSaturation() { return Saturation; }
-
     public Location getLocation() { return NLocation; }
-
     public String getName() { return Name; }
-
     public GameMode getGamemode() { return NGamemode; }
-
     public UUID getUUID() { return NUUID; }
-
     public float getExp() { return Exp; }
 }
