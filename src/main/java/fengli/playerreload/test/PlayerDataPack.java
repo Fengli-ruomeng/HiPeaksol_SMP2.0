@@ -16,10 +16,10 @@ public class PlayerDataPack {
     不知道这个方法有什么意义，反正写上就完事了，又不亏
     有BUG会音速更新，目前该数据包类处于测试.
     */
-    private double Health;      private int FoodLevel;
-    private float Saturation;   private Location NLocation;
-    private final String Name;  private GameMode NGamemode ;
-    private final UUID NUUID;   private float Exp;
+    private double Health;     private int FoodLevel;
+    private float Saturation;  private Location NLocation;
+    private String Name;       private GameMode NGamemode ;
+    private UUID NUUID;        private float Exp;
     //创建一个玩家的包
     public PlayerDataPack(Player player){
         this.Health = player.getHealth();          this.FoodLevel = player.getFoodLevel();
@@ -27,21 +27,27 @@ public class PlayerDataPack {
         this.Name = player.getName();              this.NGamemode = player.getGameMode();
         this.NUUID = player.getUniqueId();         this.Exp = player.getExp();
     }
-    //自定义包,可以相当于创建了一个指定玩家的包,而数据是自定义
-    //只要Name和UUID和那个玩家一致即可
-    //如果是想万用包,Name和UUID请随机填入.
+    /*自定义包,可以相当于创建了一个指定玩家的包,而数据是自定义
+    只要Name和UUID和那个玩家一致即可
+    如果是想万用包,Name和UUID请随机填入.*/
     public PlayerDataPack(double Health,int FoodLevel,float Saturation,Location location,String Name,GameMode gameMode,UUID UID,float Exp){
         this.Health = Health;           this.FoodLevel = FoodLevel;
         this.Saturation = Saturation;   this.NLocation = location;
         this.Name = Name;               this.NGamemode = gameMode;
         this.NUUID = UID;               this.Exp = Exp;
     }
+    //复制包,但构建的时候Name和UUID必须单独填写.
+    public PlayerDataPack(PlayerDataPack pack,String Name,UUID UID){
+        this.Health = pack.getHealth();           this.FoodLevel = pack.getFoodLevel();
+        this.Saturation = pack.getSaturation();   this.NLocation = pack.getLocation();
+        this.NGamemode = pack.getGamemode();      this.Exp = pack.getExp();
+        this.NUUID = UID;                         this.Name = Name;
+    }
     //覆盖(不覆盖关键信息，如名字和UID,万用包
     public void Covered_NoUid(Player player){
         player.setHealth(Health);          player.setFoodLevel(FoodLevel);
         player.setSaturation(Saturation);  player.teleport(NLocation);
-        player.setDisplayName(Name);       player.setGameMode(NGamemode);
-        player.setExp(Exp);
+        player.setGameMode(NGamemode);     player.setExp(Exp);
     }
     //覆盖(必须Name和UUID一致，否则返回假，其他则为真.
     public boolean Covered(Player player){
@@ -51,6 +57,16 @@ public class PlayerDataPack {
         player.setSaturation(Saturation);  player.teleport(NLocation);
         player.setGameMode(NGamemode);     player.setExp(Exp);
         return true;
+    }
+    //复制(可选复制不复制UUID和NAME
+    public void Copy_Pack(PlayerDataPack pack,boolean copyName){
+        this.Health = pack.getHealth();           this.FoodLevel = pack.getFoodLevel();
+        this.Saturation = pack.getSaturation();   this.NLocation = pack.getLocation();
+        this.NGamemode = pack.getGamemode();      this.Exp = pack.getExp();
+        if (copyName){
+            this.NUUID = pack.getUUID();
+            this.Name = pack.getName();
+        }
     }
     //不提供指定覆盖某样数据的功能，因为可以直接从某个包内提取数据然后直接Set.
 
@@ -72,6 +88,4 @@ public class PlayerDataPack {
     public GameMode getGamemode() { return NGamemode; }
     public UUID getUUID() { return NUUID; }
     public float getExp() { return Exp; }
-    
-    //这代码太帅了 芜湖
 }
