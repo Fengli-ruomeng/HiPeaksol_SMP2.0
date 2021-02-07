@@ -72,4 +72,6 @@ public class PlayerDataPack {
     public GameMode getGamemode() { return NGamemode; }
     public UUID getUUID() { return NUUID; }
     public float getExp() { return Exp; }
+    
+    //这代码太帅了 芜湖
 }
