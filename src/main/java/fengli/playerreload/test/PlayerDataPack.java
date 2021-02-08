@@ -2,6 +2,7 @@ package fengli.playerreload.test;
 //以后当数据包用 先随便写一个测试
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -20,21 +21,24 @@ public class PlayerDataPack {
     private float Saturation;  private Location NLocation;
     private String Name;       private GameMode NGamemode ;
     private UUID NUUID;        private float Exp;
+    private double MaxHealth;
     //创建一个玩家的包
     public PlayerDataPack(Player player){
         this.Health = player.getHealth();          this.FoodLevel = player.getFoodLevel();
         this.Saturation = player.getSaturation();  this.NLocation = player.getLocation();
         this.Name = player.getName();              this.NGamemode = player.getGameMode();
         this.NUUID = player.getUniqueId();         this.Exp = player.getExp();
+        this.MaxHealth = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
     }
     /*自定义包,可以相当于创建了一个指定玩家的包,而数据是自定义
     只要Name和UUID和那个玩家一致即可
     如果是想万用包,Name和UUID请随机填入.*/
-    public PlayerDataPack(double Health,int FoodLevel,float Saturation,Location location,String Name,GameMode gameMode,UUID UID,float Exp){
+    public PlayerDataPack(double Health,int FoodLevel,float Saturation,Location location,String Name,GameMode gameMode,UUID UID,float Exp,double MaxHealth){
         this.Health = Health;           this.FoodLevel = FoodLevel;
         this.Saturation = Saturation;   this.NLocation = location;
         this.Name = Name;               this.NGamemode = gameMode;
         this.NUUID = UID;               this.Exp = Exp;
+        this.MaxHealth = MaxHealth;
     }
     //复制包,但构建的时候Name和UUID必须单独填写.
     public PlayerDataPack(PlayerDataPack pack,String Name,UUID UID){
@@ -42,12 +46,14 @@ public class PlayerDataPack {
         this.Saturation = pack.getSaturation();   this.NLocation = pack.getLocation();
         this.NGamemode = pack.getGamemode();      this.Exp = pack.getExp();
         this.NUUID = UID;                         this.Name = Name;
+        this.MaxHealth = pack.getMaxHealth();
     }
     //覆盖(不覆盖关键信息，如名字和UID,万用包
     public void Covered_NoUid(Player player){
         player.setHealth(Health);          player.setFoodLevel(FoodLevel);
         player.setSaturation(Saturation);  player.teleport(NLocation);
         player.setGameMode(NGamemode);     player.setExp(Exp);
+        player.setMaxHealth(MaxHealth);
     }
     //覆盖(必须Name和UUID一致，否则返回假，其他则为真.
     public boolean Covered(Player player){
@@ -56,6 +62,7 @@ public class PlayerDataPack {
         player.setHealth(Health);          player.setFoodLevel(FoodLevel);
         player.setSaturation(Saturation);  player.teleport(NLocation);
         player.setGameMode(NGamemode);     player.setExp(Exp);
+        player.setMaxHealth(MaxHealth);
         return true;
     }
     //复制(可选复制不复制UUID和NAME
@@ -63,6 +70,7 @@ public class PlayerDataPack {
         this.Health = pack.getHealth();           this.FoodLevel = pack.getFoodLevel();
         this.Saturation = pack.getSaturation();   this.NLocation = pack.getLocation();
         this.NGamemode = pack.getGamemode();      this.Exp = pack.getExp();
+        this.MaxHealth = pack.getMaxHealth();
         if (copyName){
             this.NUUID = pack.getUUID();
             this.Name = pack.getName();
@@ -78,6 +86,7 @@ public class PlayerDataPack {
     //Set方法里不提供设置名字和UUID 因为这两条数据是用于判断是否为特殊私有包用
     public void setGamemode(GameMode NGamemode) { this.NGamemode = NGamemode; }
     public void setExp(float exp) { Exp = exp; }
+    public void setMaxHealth(double maxHealth) { MaxHealth = maxHealth; }
 
     //get
     public double getHealth() { return Health; }
@@ -88,4 +97,5 @@ public class PlayerDataPack {
     public GameMode getGamemode() { return NGamemode; }
     public UUID getUUID() { return NUUID; }
     public float getExp() { return Exp; }
+    public double getMaxHealth() { return MaxHealth; }
 }
